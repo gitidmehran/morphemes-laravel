@@ -1,0 +1,641 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Your super  ApplicationAPI",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/version-info": {
+            "get": {
+                "tags": [
+                    "Server Info"
+                ],
+                "summary": "Get Server Version Info",
+                "description": "Get Server Version Info",
+                "operationId": "versionInfo",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Server Version Information Retrieved Successfully"
+                                        },
+                                        "serverVersion": {
+                                            "type": "string",
+                                            "example": "0.0.1"
+                                        },
+                                        "lastReleaseDate": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2023-08-22"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/get-root-words": {
+            "get": {
+                "tags": [
+                    "Morphemes"
+                ],
+                "summary": "Get list of All Root Words",
+                "description": "Get list of All Root Words",
+                "operationId": "rootWords",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Root Words Data Retrieved Successfully"
+                                        },
+                                        "list": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "englishWord": {
+                                                        "type": "string",
+                                                        "example": "A%5Edam"
+                                                    },
+                                                    "rootWord": {
+                                                        "type": "string",
+                                                        "example": "آدَم"
+                                                    },
+                                                    "seperateRootWord": {
+                                                        "type": "string",
+                                                        "example": "آدَم"
+                                                    },
+                                                    "isExist": {
+                                                        "type": "boolean",
+                                                        "example": "false"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/get-morphemes": {
+            "post": {
+                "tags": [
+                    "Morphemes"
+                ],
+                "summary": "Get list of Morphemes",
+                "description": "Get list of Morphemes",
+                "operationId": "morphemes",
+                "requestBody": {
+                    "description": "Pass English Root Word In Order to Get data against specific Root Word",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "rootWord"
+                                ],
+                                "properties": {
+                                    "rootWord": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Abb"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Morphemes Data Retrieved Successfully"
+                                        },
+                                        "totalRecords": {
+                                            "type": "integer",
+                                            "example": "140"
+                                        },
+                                        "list": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "morpheme_no": {
+                                                        "type": "integer",
+                                                        "example": "0"
+                                                    },
+                                                    "weight": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "word": {
+                                                        "type": "string",
+                                                        "example": "مَصْتُ"
+                                                    },
+                                                    "group": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "subgroup": {
+                                                        "type": "number",
+                                                        "example": "1.1"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The root word field is required."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": ""
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/words-by-groups": {
+            "post": {
+                "tags": [
+                    "Morphemes"
+                ],
+                "summary": "Get Morphemes Data with Respect to Groups and Subgroups",
+                "description": "Get Morphemes Data with Respect to Groups and Subgroups",
+                "operationId": "wordByGroupSubGroups",
+                "requestBody": {
+                    "description": "Pass English Root Word In Order to Get data against specific Root Word",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "rootWord"
+                                ],
+                                "properties": {
+                                    "rootWord": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Abb"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Words data Retrived Successfully"
+                                        },
+                                        "list": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "weight": {
+                                                        "type": "string",
+                                                        "example": "Weight 1"
+                                                    },
+                                                    "morphemeForm": {
+                                                        "type": "string",
+                                                        "example": "أَبَبَ"
+                                                    },
+                                                    "isReferenceExist": {
+                                                        "type": "boolean",
+                                                        "example": "false"
+                                                    },
+                                                    "groups": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "example": "Group 1"
+                                                                },
+                                                                "isReferenceExist": {
+                                                                    "type": "boolean",
+                                                                    "example": "false"
+                                                                },
+                                                                "subGroups": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "example": "SubGroup 1.1"
+                                                                            },
+                                                                            "referenceWordCount": {
+                                                                                "type": "integer",
+                                                                                "example": "0"
+                                                                            },
+                                                                            "arabicHeading": {
+                                                                                "type": "string",
+                                                                                "example": "فِعْل أَمْر"
+                                                                            },
+                                                                            "englishHeading": {
+                                                                                "type": "string",
+                                                                                "example": "imparative verb"
+                                                                            },
+                                                                            "mainWords": {
+                                                                                "type": "array",
+                                                                                "items": {
+                                                                                    "properties": {
+                                                                                        "key": {
+                                                                                            "type": "string",
+                                                                                            "example": "1.1.1"
+                                                                                        },
+                                                                                        "arabicHeading": {
+                                                                                            "type": "string",
+                                                                                            "example": "فِعْل أَمْر"
+                                                                                        },
+                                                                                        "englishHeading": {
+                                                                                            "type": "string",
+                                                                                            "example": "imparative verb"
+                                                                                        },
+                                                                                        "words": {
+                                                                                            "type": "array",
+                                                                                            "items": {
+                                                                                                "properties": {
+                                                                                                    "word": {
+                                                                                                        "type": "string",
+                                                                                                        "example": "مَصْتُ"
+                                                                                                    },
+                                                                                                    "group": {
+                                                                                                        "type": "integer",
+                                                                                                        "example": "1"
+                                                                                                    },
+                                                                                                    "weight": {
+                                                                                                        "type": "integer",
+                                                                                                        "example": "1"
+                                                                                                    },
+                                                                                                    "subgroup": {
+                                                                                                        "type": "number",
+                                                                                                        "example": "1.1"
+                                                                                                    },
+                                                                                                    "template": {
+                                                                                                        "type": "string",
+                                                                                                        "example": "افعَلْ"
+                                                                                                    },
+                                                                                                    "morpheme_no": {
+                                                                                                        "type": "integer",
+                                                                                                        "example": "0"
+                                                                                                    },
+                                                                                                    "word_number": {
+                                                                                                        "type": "integer",
+                                                                                                        "example": "1.1.1"
+                                                                                                    },
+                                                                                                    "reference": {
+                                                                                                        "type": "boolean",
+                                                                                                        "example": "false"
+                                                                                                    },
+                                                                                                    "matchingWords": {
+                                                                                                        "type": "array",
+                                                                                                        "items": {}
+                                                                                                    }
+                                                                                                },
+                                                                                                "type": "object"
+                                                                                            }
+                                                                                        }
+                                                                                    },
+                                                                                    "type": "object"
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "type": "object"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The root word field is required."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": ""
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/words-by-groups-only": {
+            "post": {
+                "tags": [
+                    "Morphemes"
+                ],
+                "summary": "Get list of words arrange by groups only",
+                "description": "Get list of words arrange by groups only",
+                "operationId": "wordsByGroupOnly",
+                "requestBody": {
+                    "description": "Pass English Root Word In Order to Get data against specific Root Word",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "rootWord"
+                                ],
+                                "properties": {
+                                    "rootWord": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Abb"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Words By Groups Only Data Retrived Successfully"
+                                        },
+                                        "list": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "key": {
+                                                        "type": "string",
+                                                        "example": "Group 1"
+                                                    },
+                                                    "words": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "word": {
+                                                                    "type": "string",
+                                                                    "example": "مَصْتُ"
+                                                                },
+                                                                "group": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "weight": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "subgroup": {
+                                                                    "type": "number",
+                                                                    "example": "1.1"
+                                                                },
+                                                                "template": {
+                                                                    "type": "string",
+                                                                    "example": "افعَلْ"
+                                                                },
+                                                                "morpheme_no": {
+                                                                    "type": "integer",
+                                                                    "example": "0"
+                                                                },
+                                                                "word_number": {
+                                                                    "type": "integer",
+                                                                    "example": "1.1.1"
+                                                                },
+                                                                "reference": {
+                                                                    "type": "boolean",
+                                                                    "example": "false"
+                                                                },
+                                                                "matchingWords": {
+                                                                    "type": "array",
+                                                                    "items": {}
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something Went Wrong."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The root word field is required."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": ""
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
